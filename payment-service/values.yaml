@@ -9,12 +9,13 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: LoadBalancer
-  port: 8084
+  type: NodePort
+  port: 8400
+  targetPort: 8400
 
 readinessProbe:
   path: /payment-service/actuator/health
-  port: 8084
+  port: 8400
   initialDelaySeconds: 60
   periodSeconds: 10
   timeoutSeconds: 5
@@ -22,7 +23,7 @@ readinessProbe:
 
 livenessProbe:
   path: /payment-service/actuator/health
-  port: 8084
+  port: 8400
   initialDelaySeconds: 90
   periodSeconds: 15
   timeoutSeconds: 5
@@ -47,3 +48,14 @@ env:
     value: "false"
   - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
     value: "health,info,metrics"
+ingress:
+  enabled: true
+  className: "gce"
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+  hosts:
+    - host: ""
+      paths:
+        - path: /payment-service
+          pathType: Prefix
+  tls: []

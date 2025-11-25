@@ -1,14 +1,14 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "user-service.name" -}}
+{{- define "shipping-service.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Create a default fully qualified app name.
 */}}
-{{- define "user-service.fullname" -}}
+{{- define "shipping-service.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -24,16 +24,16 @@ Create a default fully qualified app name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "user-service.chart" -}}
+{{- define "shipping-service.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "user-service.labels" -}}
-helm.sh/chart: {{ include "user-service.chart" . }}
-{{ include "user-service.selectorLabels" . }}
+{{- define "shipping-service.labels" -}}
+helm.sh/chart: {{ include "shipping-service.chart" . }}
+{{ include "shipping-service.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -43,7 +43,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "user-service.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "user-service.name" . }}
+{{- define "shipping-service.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "shipping-service.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
