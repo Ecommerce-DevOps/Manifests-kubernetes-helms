@@ -9,7 +9,7 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 8800
   targetPort: 8800
 
@@ -50,7 +50,7 @@ env:
     value: "health,info,metrics"
 
 ingress:
-  enabled: true
+  enabled: false
   className: "gce"
   annotations:
     kubernetes.io/ingress.class: "gce"
