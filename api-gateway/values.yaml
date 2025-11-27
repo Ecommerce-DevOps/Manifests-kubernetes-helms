@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: us-central1-docker.pkg.dev/rock-fortress-479417-t5/ecommerce-microservices/api-gateway
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources: {}
+
+env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: "prod"
+  - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+    value: "http://discovery:8761/eureka/"

@@ -3,7 +3,7 @@ fullnameOverride: proxy-client
 replicaCount: 1
 
 image:
-  repository: us-central1-docker.pkg.dev/ecommerce-backend-1760307199/ecommerce-microservices/proxy-client
+  repository: us-central1-docker.pkg.dev/rock-fortress-479417-t5/ecommerce-microservices/proxy-client
   tag: dev
   pullPolicy: IfNotPresent
 

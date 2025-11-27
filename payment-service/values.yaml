@@ -4,7 +4,7 @@ fullnameOverride: payment-service
 replicaCount: 1
 
 image:
-  repository: us-central1-docker.pkg.dev/ecommerce-backend-1760307199/ecommerce-microservices/payment-service
+  repository: us-central1-docker.pkg.dev/rock-fortress-479417-t5/ecommerce-microservices/payment-service
   tag: latest-dev
   pullPolicy: IfNotPresent
 
