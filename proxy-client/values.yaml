@@ -30,6 +30,8 @@ livenessProbe:
   failureThreshold: 3
 
 env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: "dev"
   - name: SPRING_ZIPKIN_BASE_URL
     value: "http://zipkin:9411/"
   - name: eureka.client.service-url.defaultZone
