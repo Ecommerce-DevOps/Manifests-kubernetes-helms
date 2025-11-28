@@ -9,7 +9,7 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: ClusterIP
+  type: NodePort
   port: 8300
   targetPort: 8300
 
