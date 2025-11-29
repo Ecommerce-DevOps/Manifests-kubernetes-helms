@@ -3,7 +3,7 @@ fullnameOverride: discovery
 replicaCount: 1
 
 image:
-  repository: us-central1-docker.pkg.dev/rock-fortress-479417-t5/ecommerce-microservices/service-discovery
+  repository: us-central1-docker.pkg.dev/rock-fortress-479417-t5/ecommerce-microservices/discovery
   tag: latest-dev
   pullPolicy: IfNotPresent
 
