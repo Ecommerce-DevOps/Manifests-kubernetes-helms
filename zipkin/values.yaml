@@ -14,3 +14,11 @@ readinessProbe:
   port: 9411
   initialDelaySeconds: 30
   periodSeconds: 10
+
+livenessProbe:
+  path: /health
+  port: 9411
+  initialDelaySeconds: 60
+  periodSeconds: 15
+  timeoutSeconds: 5
+  failureThreshold: 3
