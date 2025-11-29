@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: {{ .Values.fullnameOverride }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "{{ .Values.service.port }}"
     spec:
       containers:
       - name: {{ .Values.fullnameOverride }}
