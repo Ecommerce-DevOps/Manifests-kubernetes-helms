@@ -49,17 +49,24 @@ data:
         kubernetes_sd_configs:
           - role: pod
         relabel_configs:
+          # Solo pods con anotación prometheus.io/scrape: "true"
           - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
             action: keep
             regex: "true"
+
+          # Path de scrape, por ejemplo /actuator/prometheus
           - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
             action: replace
             target_label: __metrics_path__
-          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_port]
+            regex: (.+)
+
+          # Construcción correcta de IP:PORT
+          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
             action: replace
             target_label: __address__
-            regex: (.+)
-            replacement: $1
+            regex: ([^:]+)(?::\d+)?;(\d+)
+            replacement: $1:$2
+      # -------------------------------------------------------------
 
       - job_name: 'kubernetes-services'
         kubernetes_sd_configs:
