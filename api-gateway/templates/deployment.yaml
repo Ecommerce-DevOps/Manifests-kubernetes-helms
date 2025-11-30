@@ -42,11 +42,20 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          env:
+            {{- range $index, $env := .Values.env }}
+            {{- if $env }}
+            {{- if $env.name }}
+            - name: {{ $env.name }}
+              value: {{ $env.value | quote }}
+            {{- end }}
+            {{- end }}
+            {{- end }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}

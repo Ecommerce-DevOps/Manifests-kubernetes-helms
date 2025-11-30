@@ -39,13 +39,13 @@ env:
   - name: EUREKA_INSTANCE_HOSTNAME
     value: "proxy-client"
   - name: EUREKA_CLIENT_REGISTER_WITH_EUREKA
-    value: "false"
+    value: "true"
   - name: EUREKA_CLIENT_FETCH_REGISTRY
-    value: "false"
+    value: "true"
   - name: EUREKA_INSTANCE_PREFER_IP_ADDRESS
-    value: "false"
+    value: "true"
   - name: EUREKA_CLIENT_ENABLED
-    value: "false"
+    value: "true"
   - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
     value: "health,info,metrics"
 
