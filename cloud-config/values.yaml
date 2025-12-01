@@ -28,3 +28,7 @@ resources: {}
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: "native"
+  - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+    value: "http://discovery:8761/eureka/"
+  - name: SPRING_ZIPKIN_BASE_URL
+    value: "http://zipkin:9411/"
