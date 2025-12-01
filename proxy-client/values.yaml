@@ -5,17 +5,17 @@ replicaCount: 1
 image:
   repository: us-central1-docker.pkg.dev/rock-fortress-479417-t5/ecommerce-microservices/proxy-client
   tag: dev
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   type: NodePort
   port: 80
-  targetPort: 8900
+  targetPort: 8080
   nodePort: 30900
 
 readinessProbe:
   path: /app/actuator/health
-  port: 8900
+  port: 8080
   initialDelaySeconds: 60
   periodSeconds: 10
   timeoutSeconds: 5
@@ -23,7 +23,7 @@ readinessProbe:
 
 livenessProbe:
   path: /app/actuator/health
-  port: 8900
+  port: 8080
   initialDelaySeconds: 90
   periodSeconds: 15
   timeoutSeconds: 5

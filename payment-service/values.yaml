@@ -16,7 +16,7 @@ service:
 readinessProbe:
   path: /payment-service/actuator/health
   port: 8400
-  initialDelaySeconds: 60
+  initialDelaySeconds: 120
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
@@ -24,14 +24,16 @@ readinessProbe:
 livenessProbe:
   path: /payment-service/actuator/health
   port: 8400
-  initialDelaySeconds: 90
+  initialDelaySeconds: 150
   periodSeconds: 15
   timeoutSeconds: 5
-  failureThreshold: 3
+  failureThreshold: 4
 
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: "stage"
+  - name: SPRING_CONFIG_IMPORT
+    value: "optional:configserver:http://cloud-config:9296"
   - name: SPRING_ZIPKIN_BASE_URL
     value: "http://zipkin:9411/"
   - name: eureka.client.service-url.defaultZone
@@ -48,6 +50,12 @@ env:
     value: "false"
   - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
     value: "health,info,metrics"
+  - name: SPRING_DATASOURCE_URL
+    value: "jdbc:mysql://mysql:3306/ecommerce_payment_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
+  - name: SPRING_DATASOURCE_USERNAME
+    value: "root"
+  - name: SPRING_DATASOURCE_PASSWORD
+    value: ""
 ingress:
   enabled: false
   className: "gce"

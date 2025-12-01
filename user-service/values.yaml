@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: us-central1-docker.pkg.dev/rock-fortress-479417-t5/ecommerce-microservices/user-service
   tag: dev
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   type: NodePort
@@ -14,7 +14,7 @@ service:
 readinessProbe:
   path: /user-service/actuator/health 
   port: 8700
-  initialDelaySeconds: 60 
+  initialDelaySeconds: 180 
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
@@ -22,7 +22,7 @@ readinessProbe:
 livenessProbe: 
   path: /user-service/actuator/health
   port: 8700
-  initialDelaySeconds: 90
+  initialDelaySeconds: 180
   periodSeconds: 15
   timeoutSeconds: 5
   failureThreshold: 3
@@ -30,6 +30,8 @@ livenessProbe:
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: "stage"
+  - name: SPRING_CONFIG_IMPORT
+    value: "optional:configserver:http://cloud-config:9296"
   - name: SPRING_ZIPKIN_BASE_URL
     value: "http://zipkin:9411/"
   - name: eureka.client.service-url.defaultZone
@@ -46,6 +48,12 @@ env:
     value: "false"
   - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE  
     value: "health,info,metrics"
+  - name: SPRING_DATASOURCE_URL
+    value: "jdbc:mysql://mysql:3306/ecommerce_user_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
+  - name: SPRING_DATASOURCE_USERNAME
+    value: "root"
+  - name: SPRING_DATASOURCE_PASSWORD
+    value: ""
 
 ingress:
   enabled: false

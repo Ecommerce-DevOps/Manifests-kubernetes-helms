@@ -1,3 +1,5 @@
+fullnameOverride: cloud-config
+
 replicaCount: 1
 
 image:
@@ -7,7 +9,19 @@ image:
 
 service:
   type: ClusterIP
-  port: 8888
+  port: 9296
+
+serviceAccount:
+  create: false
+
+ingress:
+  enabled: false
+
+httpRoute:
+  enabled: false
+
+autoscaling:
+  enabled: false
 
 resources: {}
 
